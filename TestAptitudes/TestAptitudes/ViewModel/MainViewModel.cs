@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -13,14 +13,15 @@ namespace TestAptitudes.ViewModel
         public ICommand AddUserCmd => new Command(AddUser);
         public ICommand AddUserListCmd => new Command(LoadUsers);
 
-        public List<UsuarioModel> Usuarios { get; set; }
+        public ObservableCollection<UsuarioModel> Usuarios { get; set; }
+
         private UsuarioService UsuarioService;
 
         public MainViewModel()
         {
             UsuarioService = new UsuarioService();
 
-            Usuarios = new List<UsuarioModel>();
+            Usuarios = new ObservableCollection<UsuarioModel>();
             LoadUsers();
         }
 
