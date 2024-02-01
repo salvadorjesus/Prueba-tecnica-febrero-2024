@@ -24,9 +24,9 @@ namespace TestAptitudes.ViewModel
             AddUsuarioALista();
         }
 
-        private void AddUsuarioALista()
+        private async void AddUsuarioALista()
         {
-            var usuarios = UsuarioService.GetUsuarios();
+            var usuarios = await UsuarioService.GetUsuarios();
             foreach (var usuario in usuarios)
                 Usuarios.Add(usuario);
         }

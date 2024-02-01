@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TestAptitudes.Model;
 
 namespace TestAptitudes.Services
 {
     public class UsuarioService
     {
-        public List<UsuarioModel> GetUsuarios()
+        /** Use to emulate a delay when getting users using the using the mockup function.
+         * This kind of user data usually come from the internet, a data base or from disc,
+         * so we are avoiding a future technical debt by writting asynchronous code.*/
+        public int MockupDelay = 0;
+        public async Task<List<UsuarioModel>> GetUsuarios()
         {
-            return GetUsuariosMockup();
+            //A factory method could be implemented here if needed.
+            return await GetUsuariosMockup();
         }
 
-        private List<UsuarioModel> GetUsuariosMockup()
+        private async Task<List<UsuarioModel>> GetUsuariosMockup()
         {
+            await Task.Delay(MockupDelay);
+
             return new List<UsuarioModel>
             {
                 new UsuarioModel() { Nombre = "Nuria", Apellido = "García", Telefono = "999 88 87 77" , Seleccionado=false},
