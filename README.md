@@ -38,3 +38,29 @@ Se han cambiado ligeramente la nomenclatura de las funciones en el viewModel y s
 
 ### Inyección de dependencias
 Sería interesante utilizar inyección de dependencias para el Servicio y quizá para el viewModel. .Net Maui viene con un sistema de inyección de dependencias integrado que facilita mucho realizarlas. Sin embargo, dado que Xamarin no lo tiene, se suele implementar esta funcionalidad importando un paquete Nuget que la provea. En este caso, dado el tamaño del proyecto, considero que no está justificado el esfuerzo de desarrollo y la adición de una nueva dependencia al mismo (más allá de dejar constancia en esta nota).
+
+## 2. Solución de bugs.
+Relizada en la rama [bux_fixing](https://github.com/salvadorjesus/Prueba-tecnica-febrero-2024/tree/dev).
+### La aplicación tiene un botón de añadir usuario no funciona correctamente
+La lista del [viewModel](https://github.com/salvadorjesus/Prueba-tecnica-febrero-2024/blob/bug_fixing/TestAptitudes/TestAptitudes/ViewModel/MainViewModel.cs) que almacena los usuarios no es observable. Como consecuencia, al alterar esta la vista no detecta que tiene que refrescarse. Cambiar la lista por una `ObservableCollection` soluciona el problema.
+```
+        public ObservableCollection<UsuarioModel> Usuarios { get; set; }
+        //...
+        public MainViewModel()
+        {
+            //...
+            Usuarios = new ObservableCollection<UsuarioModel>();
+            //...
+        }
+```
+### Nombre y apellidos muy separados en el listado
+En la descripción de este bug se especifica que nombre y apellidos deben aparecer a continuación, sin importar la longitud de estos. Dado que, en principio, un nombre puede ser más largo que la columna que lo contiene, parece conveniente que nombre y apellidos se presenten en una sola etiqueta. Para ello utilizamos un _multibinding_ desde la vista, ya que la presentación no es responsabilidad del viewModel.
+```
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Nombre"/>
+                                    <Binding Path="Apellido"/>
+                                </MultiBinding>
+                            </Label.Text>
+```
+La tabla queda ahora con una sola columna. Es posible que el autor original quiera añadir otros elementos a la celda (como el color, más adelante). Además, mantiene el requisito de altura.
