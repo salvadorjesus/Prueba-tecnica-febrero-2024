@@ -12,6 +12,7 @@ namespace TestAptitudes.ViewModel
     {
         public ICommand AddUserCmd => new Command(AddUser);
         public ICommand AddUserListCmd => new Command(LoadUsers);
+        public ICommand SwitchSelectedCmd => new Command(SwitchUserSelectedStatus);
 
         public ObservableCollection<UsuarioModel> Usuarios { get; set; }
 
@@ -35,6 +36,12 @@ namespace TestAptitudes.ViewModel
         private void AddUser(object obj)
         {
             Usuarios.Add(new UsuarioModel() { Nombre = "Nuevo", Apellido = "Usuario", Telefono = "999 88 87 77" });
+        }
+
+        private void SwitchUserSelectedStatus(object selectedUsuario)
+        {
+            var usuario = selectedUsuario as UsuarioModel;
+            Console.WriteLine($"Clic en el usuario: {usuario.Nombre} {usuario.Apellido}");
         }
     }
 }

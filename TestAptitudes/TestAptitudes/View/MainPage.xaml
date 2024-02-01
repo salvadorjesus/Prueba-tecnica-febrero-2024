@@ -23,6 +23,13 @@
                           BackgroundColor="{Binding Seleccionado, Converter={StaticResource SelectedToColorConverter}}"
                           VerticalOptions="Center"
                           HorizontalOptions="Center">
+                        <!--Add tap gesture to every cell in the grid-->
+                        <Grid.GestureRecognizers>
+                            <!-- Recontextualize to the page to find the command-->
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference paginaPrincipal}, Path=BindingContext.SwitchSelectedCmd}"
+                                                  CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+
                         <Label VerticalOptions="Center"
                                HorizontalOptions="Center"
                                TextColor="{StaticResource UserTextColor}">
