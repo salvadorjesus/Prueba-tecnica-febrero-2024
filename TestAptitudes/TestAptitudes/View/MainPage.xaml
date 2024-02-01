@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:TestAptitudes.Converters"
-             x:Class="TestAptitudes.MainPage"
+              x:Class="TestAptitudes.View.MainPage"
              x:Name="paginaPrincipal">
+    <!-- Temporary removing the converter reference.
+    xmlns:converters="clr-namespace:TestAptitudes.Converters"-->
 
     <StackLayout>
 
