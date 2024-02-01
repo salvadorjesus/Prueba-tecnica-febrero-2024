@@ -10,10 +10,10 @@ namespace TestAptitudes.ViewModel
 {
     public class MainViewModel
     {
+        public ICommand AddUserCmd => new Command(AddUser);
+        public ICommand AddUserListCmd => new Command(LoadUsers);
+
         public List<UsuarioModel> Usuarios { get; set; }
-
-        public ICommand AddUserCmd => new Command(AddUsuarioCmdExecute);
-
         private UsuarioService UsuarioService;
 
         public MainViewModel()
@@ -21,17 +21,17 @@ namespace TestAptitudes.ViewModel
             UsuarioService = new UsuarioService();
 
             Usuarios = new List<UsuarioModel>();
-            AddUsuarioALista();
+            LoadUsers();
         }
 
-        private async void AddUsuarioALista()
+        private async void LoadUsers()
         {
             var usuarios = await UsuarioService.GetUsuarios();
             foreach (var usuario in usuarios)
                 Usuarios.Add(usuario);
         }
 
-        private void AddUsuarioCmdExecute(object obj)
+        private void AddUser(object obj)
         {
             Usuarios.Add(new UsuarioModel() { Nombre = "Nuevo", Apellido = "Usuario", Telefono = "999 88 87 77" });
         }
