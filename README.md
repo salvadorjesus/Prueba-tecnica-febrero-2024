@@ -39,6 +39,7 @@ Se han cambiado ligeramente la nomenclatura de las funciones en el viewModel y s
 ### Inyección de dependencias
 Sería interesante utilizar inyección de dependencias para el Servicio y quizá para el viewModel. .Net Maui viene con un sistema de inyección de dependencias integrado que facilita mucho realizarlas. Sin embargo, dado que Xamarin no lo tiene, se suele implementar esta funcionalidad importando un paquete Nuget que la provea. En este caso, dado el tamaño del proyecto, considero que no está justificado el esfuerzo de desarrollo y la adición de una nueva dependencia al mismo (más allá de dejar constancia en esta nota).
 
+
 ## 2. Solución de bugs.
 Relizada en la rama [bux_fixing](https://github.com/salvadorjesus/Prueba-tecnica-febrero-2024/tree/dev).
 ### La aplicación tiene un botón de añadir usuario no funciona correctamente
