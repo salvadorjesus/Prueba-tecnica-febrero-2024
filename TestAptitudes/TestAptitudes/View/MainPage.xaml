@@ -14,12 +14,21 @@
 
                 <DataTemplate>
 
-                    <Grid ColumnDefinitions="*,*" HeightRequest="100">
-                 
-                        <Label Text="{Binding Nombre}" Grid.Column="0" VerticalOptions="Center"/>
-
-                        <Label Text="{Binding Apellido}" Grid.Column="1"  VerticalOptions="Center"/>
-
+                    <Grid ColumnDefinitions="*" HeightRequest="100">
+  
+                        <Label>
+                            
+                            <Label.Text>
+                                
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Nombre"/>
+                                    <Binding Path="Apellido"/>
+                                </MultiBinding>
+                                
+                            </Label.Text>
+                            
+                        </Label>
+                        
                     </Grid>
 
                 </DataTemplate>
