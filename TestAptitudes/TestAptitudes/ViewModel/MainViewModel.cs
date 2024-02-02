@@ -14,7 +14,7 @@ namespace TestAptitudes.ViewModel
         public ICommand AddUserListCmd => new Command(LoadUsers);
         public ICommand SwitchSelectedCmd => new Command(SwitchUserSelectedStatus);
 
-        public ObservableCollection<UsuarioModel> Usuarios { get; set; }
+        public ObservableCollection<UsuarioViewModel> Usuarios { get; set; }
 
         private UsuarioService UsuarioService;
 
@@ -22,7 +22,7 @@ namespace TestAptitudes.ViewModel
         {
             UsuarioService = new UsuarioService();
 
-            Usuarios = new ObservableCollection<UsuarioModel>();
+            Usuarios = new ObservableCollection<UsuarioViewModel>();
             LoadUsers();
         }
 
@@ -30,18 +30,19 @@ namespace TestAptitudes.ViewModel
         {
             var usuarios = await UsuarioService.GetUsuarios();
             foreach (var usuario in usuarios)
-                Usuarios.Add(usuario);
+                Usuarios.Add( new UsuarioViewModel(usuario));
         }
 
         private void AddUser(object obj)
         {
-            Usuarios.Add(new UsuarioModel() { Nombre = "Nuevo", Apellido = "Usuario", Telefono = "999 88 87 77" });
+            Usuarios.Add(new UsuarioViewModel() { Nombre = "Nuevo", Apellido = "Usuario", Telefono = "999 88 87 77" });
         }
 
         private void SwitchUserSelectedStatus(object selectedUsuario)
         {
-            var usuario = selectedUsuario as UsuarioModel;
+            var usuario = selectedUsuario as UsuarioViewModel;
             Console.WriteLine($"Clic en el usuario: {usuario.Nombre} {usuario.Apellido}");
+            usuario.Seleccionado = !usuario.Seleccionado;
         }
     }
 }
