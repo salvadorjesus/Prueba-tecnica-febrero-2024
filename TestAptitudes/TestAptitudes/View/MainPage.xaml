@@ -14,7 +14,11 @@
 
     <!--Elementos de la página-->
     <StackLayout>
-        <CollectionView ItemsSource="{Binding Usuarios}" Margin="20">
+        <CollectionView ItemsSource="{Binding Usuarios}"
+                        Margin="20"
+                        RemainingItemsThreshold="2"
+                        RemainingItemsThresholdReachedCommand="{Binding AddUserListCmd}">
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
