@@ -1,46 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              x:Class="TestAptitudes.View.MainPage"
+             xmlns:converters="clr-namespace:TestAptitudes.Converters"
+             x:Class="TestAptitudes.View.MainPage"
              x:Name="paginaPrincipal">
-    <!-- Temporary removing the converter reference.
-    xmlns:converters="clr-namespace:TestAptitudes.Converters"-->
 
+    <!--Recursos de la página-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SelectedToColorConverter x:Key="SelectedToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!--Elementos de la página-->
     <StackLayout>
-
-        <CollectionView ItemsSource="{Binding Usuarios}" Margin="20">
-
+        <CollectionView ItemsSource="{Binding Usuarios}"
+                        Margin="20"
+                        RemainingItemsThreshold="2"
+                        RemainingItemsThresholdReachedCommand="{Binding AddUserListCmd}">
+            
             <CollectionView.ItemTemplate>
-
                 <DataTemplate>
 
-                    <Grid ColumnDefinitions="*" HeightRequest="100">
-  
-                        <Label>
-                            
+                    <Grid ColumnDefinitions="*"
+                          HeightRequest="100"
+                          BackgroundColor="{Binding Seleccionado, Converter={StaticResource SelectedToColorConverter}}"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center">
+                        <!--Add tap gesture to every cell in the grid-->
+                        <Grid.GestureRecognizers>
+                            <!-- Recontextualize to the page to find the command-->
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference paginaPrincipal}, Path=BindingContext.SwitchSelectedCmd}"
+                                                  CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+
+                        <Label VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               TextColor="{StaticResource UserTextColor}">
                             <Label.Text>
-                                
                                 <MultiBinding StringFormat="{}{0} {1}">
                                     <Binding Path="Nombre"/>
                                     <Binding Path="Apellido"/>
                                 </MultiBinding>
-                                
                             </Label.Text>
-                            
                         </Label>
-                        
                     </Grid>
-
                 </DataTemplate>
-
             </CollectionView.ItemTemplate>
-
         </CollectionView>
 
         <Button Text="Add" Command="{Binding AddUserCmd}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
-
-
     </StackLayout>
-
 </ContentPage>
 
