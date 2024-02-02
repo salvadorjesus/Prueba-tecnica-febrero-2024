@@ -8,6 +8,7 @@
             <Color x:Key="SelectedColor">darkgreen</Color>
             <Color x:Key="NotSelectedColor">darkred</Color>
             <Color x:Key="UserTextColor">lightGray</Color>
+            <Color x:Key="ActivityIndicatorColor">darkGray</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

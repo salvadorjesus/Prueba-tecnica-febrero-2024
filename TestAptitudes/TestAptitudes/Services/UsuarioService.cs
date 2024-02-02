@@ -11,7 +11,7 @@ namespace TestAptitudes.Services
         /** Use to emulate a delay when getting users using the using the mockup function.
          * This kind of user data usually come from the internet, a data base or from disc,
          * so we are avoiding a future technical debt by writting asynchronous code.*/
-        public int MockupDelay = 0;
+        public int MockupDelay = 1500;
         public async Task<List<UsuarioModel>> GetUsuarios()
         {
             //A factory method could be implemented here if needed.

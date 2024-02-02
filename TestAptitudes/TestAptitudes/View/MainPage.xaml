@@ -13,11 +13,14 @@
     </ContentPage.Resources>
 
     <!--Elementos de la página-->
-    <StackLayout>
+    <Grid RowDefinitions="*,auto,auto">
         <CollectionView ItemsSource="{Binding Usuarios}"
-                        Margin="20"
-                        RemainingItemsThreshold="2"
-                        RemainingItemsThresholdReachedCommand="{Binding AddUserListCmd}">
+                        Margin="10"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        RemainingItemsThreshold="1"
+                        RemainingItemsThresholdReachedCommand="{Binding AddUserListCmd}"
+                        x:Name="UserCollection">
             
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -49,7 +52,9 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="Add" Command="{Binding AddUserCmd}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
-    </StackLayout>
+        <ActivityIndicator Grid.Row="1" IsRunning="{Binding IsLoading}" Color="{StaticResource ActivityIndicatorColor}" Margin="10"/>
+
+        <Button Text="Add" Grid.Row="2" Command="{Binding AddUserCmd}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
+    </Grid>
 </ContentPage>
 

@@ -16,7 +16,13 @@ namespace TestAptitudes.View
             InitializeComponent();
 
             this.BindingContext = new MainViewModel();
+
+            MessagingCenter.Subscribe<MainViewModel, UsuarioViewModel>(this, "Single new user added", (sender, nuevoUsuario) =>
+            {
+                UserCollection.ScrollTo(nuevoUsuario, position: ScrollToPosition.MakeVisible, animate: true);
+            });
+
         }
-    }
+    }         
 }
 
