@@ -41,7 +41,6 @@ namespace TestAptitudes.ViewModel
         private void SwitchUserSelectedStatus(object selectedUsuario)
         {
             var usuario = selectedUsuario as UsuarioViewModel;
-            Console.WriteLine($"Clic en el usuario: {usuario.Nombre} {usuario.Apellido}");
             usuario.Seleccionado = !usuario.Seleccionado;
         }
     }
