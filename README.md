@@ -116,7 +116,7 @@ Para que la vista responda al cambio de estado que efectúa el comando, tenemos 
   
 Decidirse por una opción u otra dependerá del contexto de la aplicación y, posiblemente, de las prácticas acordadas por el equipo. En este caso implementaré la tercera opción, ya que atender a los principios SOLID y MVVM es un requisito:
 
-Implementación de la clase ‘UsuarioViewModel’ para encapsular a `UsuarioModel`:
+Implementación de la clase `UsuarioViewModel` para encapsular a `UsuarioModel`:
 ```
 public class UsuarioViewModel : INotifyPropertyChanged
     {
@@ -158,11 +158,11 @@ Están en la rama [feature/extra_features](https://github.com/salvadorjesus/Prue
 https://github.com/salvadorjesus/Prueba-tecnica-febrero-2024/assets/637125/30244800-a58e-4ad6-b4bf-059fe569b792
 
 ### Simulación de tiempo de carga
-Para aprovechar que durante la factorización inicial convertí la generación de usuarios en un servicio asíncrono. Aprovechando esto he introducido un retraso de 1,5s para simular una carga desde internet.
+Durante la refactorización inicial convertí la generación de usuarios en un servicio asíncrono. Aprovechando esto he introducido un retraso de 1,5s para simular una carga desde internet.
 
 ### Indicador de actividad
-Indicador agregado en la parte inferior del listado, imitando apps de redes sociales. Se activa siempre que la aplicación está esperando al servicio de usuarios a que proporcione datos nuevos.
-Para conseguir esto he añadido una propiedad observable `IsLoading` al viewModel (para ello `MainViewModel` implementa ahora `INotifyPropertyChanged`).
+Indicador agregado en la parte inferior del listado, imitando apps de redes sociales. Se activa siempre que la aplicación esté esperando a que el servicio de usuarios proporcione datos nuevos.
+Para conseguir esto he añadido la propiedad observable `IsLoading` al viewModel (para ello `MainViewModel` implementa ahora `INotifyPropertyChanged`).
 ```
 public class MainViewModel : INotifyPropertyChanged
     {
@@ -201,7 +201,7 @@ Esta propiedad es usada por el método `LoadUsers()` para ignorar llamadas concu
 ```
 ### Scroll automático al nuevo usuario
 
-Al añadir un nuevo usuario, ahora la lista hace scroll hasta localizarlo. Esto se hace mediante el uso de mensajes, para evita acoplar el viewModel y la vista.
+Ahora, cuando se añade un nuevo usuario, la lista hace scroll hasta localizarlo. Conseguimos esto mediante el uso de mensajes, evitando así acoplar el viewModel y la vista.
 Desde el _viewModel_ se lanza el mensaje haciendo uso del MessageCenter:
 ```
         private void AddSingleUser(object obj)
